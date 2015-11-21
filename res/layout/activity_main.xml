@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.sangbo.movie"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.sina.sinavideo.sdk.VDVideoView
+        android:id="@+id/vd_video_view"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_alignParentTop="true"
+        android:background="#000000"
+        app:layerAttrs="@array/only_horizon" >
+    </com.sina.sinavideo.sdk.VDVideoView>
+
+</RelativeLayout>

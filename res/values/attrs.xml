@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 只横不竖 -->
+    <array name="only_horizon">
+        <item>@array/sv_videoview_layer_controllayer2</item>
+    </array>
+    <!-- 只有横屏没有竖屏 -->
+    <array name="sv_videoview_layer_controllayer2">
+        <item>@null</item>
+        <item>@layout/control_layer_horizon</item>
+    </array>
+    
+</resources>
