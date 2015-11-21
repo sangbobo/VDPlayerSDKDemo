@@ -18,11 +18,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Toast;
 
-public class MainActivity extends Activity
-		implements OnVDVideoFrameADListener, OnVDVideoInsertADListener, OnVDVideoPlaylistListener {
+public class MainActivity extends Activity implements OnVDVideoPlaylistListener {
 
 	private VDVideoView mVDVideoView = null;
-	private final static String TAG = "Test1Activity";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +51,7 @@ public class MainActivity extends Activity
 		info.mPlayUrl = "http://v.iask.com/v_play_ipad.php?vid=131386882&tags=videoapp_android";
 		infoList.addVideoInfo(info);
 
-		registerListener();
+		mVDVideoView.setPlaylistListener(this);
 
 		// 简单方式处理的视频列表
 		VDVideoPlayListView listView = (VDVideoPlayListView) findViewById(R.id.play_list_view);
@@ -84,20 +82,7 @@ public class MainActivity extends Activity
 		}
 		return true;
 	}
-
-	private void registerListener() {
-		mVDVideoView.setFrameADListener(this);
-		mVDVideoView.setInsertADListener(this);
-		mVDVideoView.setPlaylistListener(this);
-	}
-
-	// private void openVideo(VDVideoInfo info, int p) {
-	// mVDVideoView.stop();
-	// mVDVideoView.release(true);
-	// mVDVideoView.open(this, info);
-	// mVDVideoView.play(p);
-	// }
-
+	
 	@Override
 	protected void onStop() {
 		super.onStop();
@@ -111,43 +96,8 @@ public class MainActivity extends Activity
 	}
 
 	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
-		super.onConfigurationChanged(newConfig);
-
-		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-			mVDVideoView.setIsFullScreen(true);
-			LogS.e(VDVideoFullModeController.TAG, "onConfigurationChanged---横屏");
-		} else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-			mVDVideoView.setIsFullScreen(false);
-			LogS.e(VDVideoFullModeController.TAG, "onConfigurationChanged---竖屏");
-		}
-
-	}
-
-	@Override
 	public void onPlaylistClick(VDVideoInfo info, int p) {
 		// TODO Auto-generated method stub
-		if (info == null) {
-			LogS.e(TAG, "info is null");
-		}
 		mVDVideoView.play(p);
-	}
-
-	@Override
-	public void onInsertADClick(VDVideoInfo info) {
-		// TODO Auto-generated method stub
-		Toast.makeText(this, "广告被点击了", Toast.LENGTH_LONG).show();
-	}
-
-	@Override
-	public void onInsertADStepOutClick(VDVideoInfo info) {
-		// TODO Auto-generated method stub
-		Toast.makeText(this, "去掉广告被点击了", Toast.LENGTH_LONG).show();
-	}
-
-	@Override
-	public void onFrameADPrepared(VDVideoInfo info) {
-		// TODO Auto-generated method stub
-		Toast.makeText(this, "从这儿换图", Toast.LENGTH_LONG).show();
 	}
 }
